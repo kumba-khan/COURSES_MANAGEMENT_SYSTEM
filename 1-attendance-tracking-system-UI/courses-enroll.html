@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Enrollment - Attendance System</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">Attendance</h1>
+        <span class="logo-subtitle">Tracking System</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+        <div class="nav-section">Students</div>
+        <a href="students-list.html" class="nav-item"><span class="nav-icon">👥</span> All Students</a>
+        <a href="students-create.html" class="nav-item"><span class="nav-icon">➕</span> Add Student</a>
+        <div class="nav-section">Courses</div>
+        <a href="courses-list.html" class="nav-item"><span class="nav-icon">📚</span> All Courses</a>
+        <a href="courses-create.html" class="nav-item"><span class="nav-icon">➕</span> Add Course</a>
+        <div class="nav-section">Attendance</div>
+        <a href="attendance-mark.html" class="nav-item"><span class="nav-icon">✅</span> Mark Attendance</a>
+        <div class="nav-section">Reports</div>
+        <a href="reports-absences.html" class="nav-item"><span class="nav-icon">📋</span> Absences</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <div class="header-left"><h2 class="page-title">Manage Enrollment</h2></div>
+        <div class="header-right">
+          <span class="user-name">admin@attendance.com</span>
+          <a href="login.html" class="btn btn-outline btn-sm">Logout</a>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="card">
+          <div class="card-header">
+            <h2>Introduction to Programming - Enrollment</h2>
+            <a href="courses-show.html" class="btn btn-outline">Back to Course</a>
+          </div>
+
+          <div class="alert alert-info mb-md">
+            <strong>8 students</strong> currently enrolled in this course.
+          </div>
+
+          <h3 class="mb-md">Enroll New Student</h3>
+          <form action="#" class="mb-lg">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="student">Select Student *</label>
+                <select id="student" name="student" required>
+                  <option value="">Choose a student...</option>
+                  <option value="9">Awa Drammeh</option>
+                  <option value="10">Ebrima Touray</option>
+                  <option value="11">Kaddy Njie</option>
+                </select>
+              </div>
+              <div class="form-group" style="display: flex; align-items: flex-end;">
+                <button type="button" class="btn btn-primary" onclick="alert('Student enrolled! (Demo)')">Enroll Student</button>
+              </div>
+            </div>
+          </form>
+
+          <h3 class="mb-md">Currently Enrolled Students</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Email</th>
+                  <th>Enrolled Date</th>
+                  <th>Attendance Rate</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="students-show.html">Modou Jallow</a></td>
+                  <td>modou.jallow@example.com</td>
+                  <td>Jan 15, 2025</td>
+                  <td><span class="badge badge-success">95%</span></td>
+                  <td><button type="button" class="btn btn-sm btn-danger" onclick="alert('Student removed! (Demo)')">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><a href="students-show.html">Fatou Ceesay</a></td>
+                  <td>fatou.ceesay@example.com</td>
+                  <td>Jan 15, 2025</td>
+                  <td><span class="badge badge-success">90%</span></td>
+                  <td><button type="button" class="btn btn-sm btn-danger" onclick="alert('Student removed! (Demo)')">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><a href="students-show.html">Lamin Sanneh</a></td>
+                  <td>lamin.sanneh@example.com</td>
+                  <td>Jan 16, 2025</td>
+                  <td><span class="badge badge-warning">75%</span></td>
+                  <td><button type="button" class="btn btn-sm btn-danger" onclick="alert('Student removed! (Demo)')">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><a href="students-show.html">Isatou Njie</a></td>
+                  <td>isatou.njie@example.com</td>
+                  <td>Jan 15, 2025</td>
+                  <td><span class="badge badge-success">100%</span></td>
+                  <td><button type="button" class="btn btn-sm btn-danger" onclick="alert('Student removed! (Demo)')">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><a href="students-show.html">Ousman Camara</a></td>
+                  <td>ousman.camara@example.com</td>
+                  <td>Jan 17, 2025</td>
+                  <td><span class="badge badge-warning">80%</span></td>
+                  <td><button type="button" class="btn btn-sm btn-danger" onclick="alert('Student removed! (Demo)')">Remove</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="text-center mt-md"><a href="index.html">← Back to Demo Index</a></p>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2025 Attendance System - BDP Part 1 Project</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

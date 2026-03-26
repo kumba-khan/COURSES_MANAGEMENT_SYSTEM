@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recent Absences - Attendance System</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">Attendance</h1>
+        <span class="logo-subtitle">Tracking System</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+        <div class="nav-section">Students</div>
+        <a href="students-list.html" class="nav-item"><span class="nav-icon">👥</span> All Students</a>
+        <a href="students-create.html" class="nav-item"><span class="nav-icon">➕</span> Add Student</a>
+        <div class="nav-section">Courses</div>
+        <a href="courses-list.html" class="nav-item"><span class="nav-icon">📚</span> All Courses</a>
+        <div class="nav-section">Attendance</div>
+        <a href="attendance-mark.html" class="nav-item"><span class="nav-icon">✅</span> Mark Attendance</a>
+        <div class="nav-section">Reports</div>
+        <a href="reports-absences.html" class="nav-item"><span class="nav-icon">📋</span> Absences</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <div class="header-left"><h2 class="page-title">Recent Absences</h2></div>
+        <div class="header-right">
+          <span class="user-name">admin@attendance.com</span>
+          <a href="login.html" class="btn btn-outline btn-sm">Logout</a>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="card">
+          <div class="card-header">
+            <h2>Recent Absences</h2>
+            <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+          </div>
+
+          <div class="alert alert-info mb-lg">
+            Showing absences from the last 7 days. Total: <strong>8</strong>
+          </div>
+
+          <div class="mb-lg">
+            <h4 class="mb-sm">Jan 14, 2025</h4>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="students-show.html">Modou Camara</a></td>
+                    <td><a href="courses-show.html">Introduction to Programming</a></td>
+                    <td><a href="#" class="btn btn-sm btn-outline">View Report</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="students-show.html">Isatou Njie</a></td>
+                    <td><a href="courses-show.html">Web Development Fundamentals</a></td>
+                    <td><a href="#" class="btn btn-sm btn-outline">View Report</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mb-lg">
+            <h4 class="mb-sm">Jan 13, 2025</h4>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="students-show.html">Fatou Ceesay</a></td>
+                    <td><a href="courses-show.html">Database Management</a></td>
+                    <td><a href="#" class="btn btn-sm btn-outline">View Report</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mb-lg">
+            <h4 class="mb-sm">Jan 10, 2025</h4>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="students-show.html">Amadou Jallow</a></td>
+                    <td><a href="courses-show.html">Introduction to Programming</a></td>
+                    <td><a href="#" class="btn btn-sm btn-outline">View Report</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="students-show.html">Lamin Touray</a></td>
+                    <td><a href="courses-show.html">Digital Literacy</a></td>
+                    <td><a href="#" class="btn btn-sm btn-outline">View Report</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="students-show.html">Mariama Bah</a></td>
+                    <td><a href="courses-show.html">Database Management</a></td>
+                    <td><a href="#" class="btn btn-sm btn-outline">View Report</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center mt-md"><a href="index.html">← Back to Demo Index</a></p>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2025 Attendance System - BDP Part 1 Project</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

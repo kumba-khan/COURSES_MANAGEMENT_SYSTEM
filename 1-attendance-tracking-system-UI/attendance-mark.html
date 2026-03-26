@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mark Attendance - Attendance System</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">Attendance</h1>
+        <span class="logo-subtitle">Tracking System</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span> Dashboard</a>
+        <div class="nav-section">Students</div>
+        <a href="students-list.html" class="nav-item"><span class="nav-icon">👥</span> All Students</a>
+        <a href="students-create.html" class="nav-item"><span class="nav-icon">➕</span> Add Student</a>
+        <div class="nav-section">Courses</div>
+        <a href="courses-list.html" class="nav-item"><span class="nav-icon">📚</span> All Courses</a>
+        <div class="nav-section">Attendance</div>
+        <a href="attendance-mark.html" class="nav-item"><span class="nav-icon">✅</span> Mark Attendance</a>
+        <div class="nav-section">Reports</div>
+        <a href="reports-absences.html" class="nav-item"><span class="nav-icon">📋</span> Absences</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <div class="header-left"><h2 class="page-title">Mark Attendance</h2></div>
+        <div class="header-right">
+          <span class="user-name">admin@attendance.com</span>
+          <a href="login.html" class="btn btn-outline btn-sm">Logout</a>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="card">
+          <div class="card-header">
+            <h2>Mark Attendance</h2>
+            <a href="courses-list.html" class="btn btn-outline">Back</a>
+          </div>
+
+          <h3 class="mb-md">Introduction to Programming</h3>
+
+          <form action="#">
+            <div class="form-group mb-lg">
+              <label for="date">Date *</label>
+              <input type="date" id="date" name="date" required value="2025-01-14" style="max-width: 200px;">
+            </div>
+
+            <div class="mb-md flex gap-sm">
+              <button type="button" class="btn btn-sm btn-secondary" onclick="markAll('present')">Mark All Present</button>
+              <button type="button" class="btn btn-sm btn-outline" onclick="markAll('absent')">Mark All Absent</button>
+            </div>
+
+            <div class="attendance-grid mb-lg">
+              <div class="attendance-row">
+                <div class="attendance-student"><a href="students-show.html">Amadou Jallow</a></div>
+                <div class="attendance-select">
+                  <select name="attendance_1" class="status-select">
+                    <option value="present" selected>Present</option>
+                    <option value="late">Late</option>
+                    <option value="absent">Absent</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </div>
+              </div>
+              <div class="attendance-row">
+                <div class="attendance-student"><a href="students-show.html">Fatou Ceesay</a></div>
+                <div class="attendance-select">
+                  <select name="attendance_2" class="status-select">
+                    <option value="present" selected>Present</option>
+                    <option value="late">Late</option>
+                    <option value="absent">Absent</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </div>
+              </div>
+              <div class="attendance-row">
+                <div class="attendance-student"><a href="students-show.html">Lamin Touray</a></div>
+                <div class="attendance-select">
+                  <select name="attendance_3" class="status-select">
+                    <option value="present">Present</option>
+                    <option value="late" selected>Late</option>
+                    <option value="absent">Absent</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </div>
+              </div>
+              <div class="attendance-row">
+                <div class="attendance-student"><a href="students-show.html">Mariama Bah</a></div>
+                <div class="attendance-select">
+                  <select name="attendance_4" class="status-select">
+                    <option value="present" selected>Present</option>
+                    <option value="late">Late</option>
+                    <option value="absent">Absent</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </div>
+              </div>
+              <div class="attendance-row">
+                <div class="attendance-student"><a href="students-show.html">Modou Camara</a></div>
+                <div class="attendance-select">
+                  <select name="attendance_5" class="status-select">
+                    <option value="present">Present</option>
+                    <option value="late">Late</option>
+                    <option value="absent" selected>Absent</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </div>
+              </div>
+              <div class="attendance-row">
+                <div class="attendance-student"><a href="students-show.html">Ebrima Jobe</a></div>
+                <div class="attendance-select">
+                  <select name="attendance_6" class="status-select">
+                    <option value="present" selected>Present</option>
+                    <option value="late">Late</option>
+                    <option value="absent">Absent</option>
+                    <option value="excused">Excused</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" onclick="alert('Attendance saved! (Demo)')">Save Attendance</button>
+              <a href="courses-list.html" class="btn btn-outline">Cancel</a>
+            </div>
+          </form>
+        </div>
+
+        <p class="text-center mt-md"><a href="index.html">← Back to Demo Index</a></p>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2025 Attendance System - BDP Part 1 Project</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    function markAll(status) {
+      document.querySelectorAll('.status-select').forEach(select => {
+        select.value = status;
+      });
+    }
+  </script>
+</body>
+</html>

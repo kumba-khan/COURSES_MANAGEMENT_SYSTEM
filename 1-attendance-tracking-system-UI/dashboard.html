@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Attendance System</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">Attendance</h1>
+        <span class="logo-subtitle">Tracking System</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          Dashboard
+        </a>
+
+        <div class="nav-section">Students</div>
+        <a href="students-list.html" class="nav-item">
+          <span class="nav-icon">👥</span>
+          All Students
+        </a>
+        <a href="students-create.html" class="nav-item">
+          <span class="nav-icon">➕</span>
+          Add Student
+        </a>
+
+        <div class="nav-section">Courses</div>
+        <a href="courses-list.html" class="nav-item">
+          <span class="nav-icon">📚</span>
+          All Courses
+        </a>
+
+        <div class="nav-section">Attendance</div>
+        <a href="attendance-mark.html" class="nav-item">
+          <span class="nav-icon">✅</span>
+          Mark Attendance
+        </a>
+
+        <div class="nav-section">Reports</div>
+        <a href="reports-absences.html" class="nav-item">
+          <span class="nav-icon">📋</span>
+          Absences
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <h2 class="page-title">Dashboard</h2>
+        </div>
+        <div class="header-right">
+          <span class="user-name">admin@attendance.com</span>
+          <a href="login.html" class="btn btn-outline btn-sm">Logout</a>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="dashboard">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">👥</div>
+              <div class="stat-info">
+                <span class="stat-value">24</span>
+                <span class="stat-label">Total Students</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">✅</div>
+              <div class="stat-info">
+                <span class="stat-value">18</span>
+                <span class="stat-label">Active Students</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">📚</div>
+              <div class="stat-info">
+                <span class="stat-value">4</span>
+                <span class="stat-label">Total Courses</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">📋</div>
+              <div class="stat-info">
+                <span class="stat-value">42</span>
+                <span class="stat-label">Marked Today</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="card">
+              <div class="card-header">
+                <h3>Quick Actions</h3>
+              </div>
+              <div class="quick-actions">
+                <a href="attendance-mark.html" class="btn btn-primary">Mark Attendance</a>
+                <a href="students-create.html" class="btn btn-secondary">Add Student</a>
+                <a href="courses-list.html" class="btn btn-secondary">View Courses</a>
+                <a href="reports-absences.html" class="btn btn-outline">View Absences</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Recent Activity</h3>
+              </div>
+              <ul class="activity-list">
+                <li class="activity-item">
+                  <span class="activity-text">Amadou Jallow marked present for Web Development</span>
+                  <span class="activity-time">2 hours ago</span>
+                </li>
+                <li class="activity-item">
+                  <span class="activity-text">Fatou Ceesay marked absent for Database Management</span>
+                  <span class="activity-time">3 hours ago</span>
+                </li>
+                <li class="activity-item">
+                  <span class="activity-text">Lamin Touray marked late for Programming Basics</span>
+                  <span class="activity-time">4 hours ago</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center mt-md"><a href="index.html">← Back to Demo Index</a></p>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2025 Attendance System - BDP Part 1 Project</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
