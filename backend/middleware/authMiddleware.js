@@ -1,0 +1,8 @@
+export const protect = (req, res, next) => {
+    if (req.session && req.session.user) {
+        next();
+    } else {
+        req.flash("error", "Please log in to access this page.");
+        res.redirect("/auth/login");
+    }
+}
