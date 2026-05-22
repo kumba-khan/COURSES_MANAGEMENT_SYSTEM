@@ -1,0 +1,55 @@
+<header class="header">
+        <div class="header-left"><h2 class="page-title">Add Student</h2></div>
+        <div class="header-right">
+          <span class="user-name">{{user.email}}</span>
+          <a href="auth/login" class="btn btn-outline btn-sm">Logout</a>
+        </div>
+      </header>
+{{>actionMessage}}
+      <div class="content">
+        <div class="card">
+          <div class="card-header">
+            <h2>Add New Student</h2>
+            <a href="/students" class="btn btn-outline">Back to Students</a>
+          </div>
+
+          <form action="/students" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Enter student name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="student@example.com">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" placeholder="Phone number">
+              </div>
+              <div class="form-group">
+                <label for="status">Status *</label>
+                <select id="status" name="status" required>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="graduated">Graduated</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" >Create Student</button>
+              <a href="/students" class="btn btn-outline">Cancel</a>
+            </div>
+          </form>
+        </div>
+
+        <p class="text-center mt-md"><a href="index.html">← Back to Demo Index</a></p>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2025 Attendance System - BDP Part 1 Project</p>
+      </footer>

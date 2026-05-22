@@ -9,6 +9,7 @@ import { protect } from "./backend/middleware/authMiddleware.js";
 
 import authRoutes from "./backend/routes/authRoutes.js";
 import dashboardRoutes from "./backend/routes/dashboardRoutes.js";
+import studentsRoutes from "./backend/routes/studentRoutes.js";
 dotenv.config();
 
 import connectDB from "./backend/config/db.js";
@@ -54,6 +55,13 @@ app.engine(
     helpers: {
       eq: (a, b) => a === b,
       lte: (a, b) => a <= b,
+      formatDate: (date) => {
+        return new Date(date).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+      }
     },
   }),
 );
@@ -69,6 +77,7 @@ app.get("/", (req, res) => {
 //Routes
 app.use("/auth", authRoutes);
 app.use("/dashboard",protect, dashboardRoutes);
+app.use("/students", protect, studentsRoutes);
 
 
 const PORT = process.env.PORT || 6500;

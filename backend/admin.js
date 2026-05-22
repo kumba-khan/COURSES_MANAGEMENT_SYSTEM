@@ -7,7 +7,7 @@ dotenv.config({ path: "../.env" });
 
 const createRoles = async () => {
     try{
-        // Connect to the database using your existing function
+        // Connect to the database using your existing functionfish
         await connectDB();
 
         console.log("Adding Users...");
