@@ -17,15 +17,17 @@ const createRoles = async () => {
 
         const users = [
             {
-                username: "Admin",
-                email: "kumbizzko@gmail.com",
+                username: "Kumba Khan",
+                email: "kumba@gmail.com",
                 password: await bcrypt.hash("admin123", 10),
+                role: "admin"
             },
 
             {
-                username: "Student",
+                username: "Momodou Khan",
                 email: "momodou@gmail.com",
                 password: await bcrypt.hash("student123", 10),
+                role: "student"
             }
         ];
 

@@ -1,13 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
-
-// Show login page
-export const showLogin = (req, res) => {
-  res.render("auth/login", {
-    layout: false,
-    title: "Login",
-  });
-};
+import jwt from "jsonwebtoken"
 
 //Handle login form submission
 export const login = async (req, res) => {
@@ -17,44 +10,39 @@ export const login = async (req, res) => {
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      req.flash("error", "Invalid email or password");
-      return res.redirect("/auth/login");
+      return res.status(400).json({message:'Invalid email'});
     }
     //check if password matches
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      req.flash("error", "Invalid email or password");
-      return res.redirect("/auth/login");
+      return res.status(400).json({message:'Invalid password'});
     }
 
     // Set user session
-    req.session.user = {
-      id: user._id,
+    const accessToken = jwt.sign({
+      userId:user._id,
       username: user.username,
-      email: user.email,
-      role: user.role,
-    };
+      role: user.role
+    },
+    process.env.JWT_SECRET,
+    {expiresIn: '1h'}
+    )
 
-    req.flash("success", "Logged in successfully");
-    res.redirect("/dashboard");
-  }
-
-  catch(error){
-    console.error(error);
-    req.flash("error", "An error occurred while logging in");
-    res.redirect("/auth/login");
+    res.status(200).json({accessToken})
+  }catch(error){
+    res.status(500).json({message: 'Login failed', error: error.message});
   }
 };
 
-export const logout = (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error(err);
-      req.flash("error", "An error occurred while logging out");
-      return res.redirect("/dashboard");
-    }
-    res.clearCookie("connect.sid");
-    req.flash("success", "Logged out successfully");
-    res.redirect("/auth/login");
-  });
+export const logout = async (req, res) => {
+  try {
+    res.status(200).json({
+      message: "Logged out successfully"
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Logout failed",
+      error: error.message
+    });
+  }
 };

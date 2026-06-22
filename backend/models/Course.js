@@ -1,4 +1,4 @@
-import mongoose from mongoose;
+import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema({
   name: {
@@ -31,7 +31,7 @@ const courseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student',
     },
-  ]
+  ],
 }, { timestamps: true });
 
 const Course = mongoose.model('Course', courseSchema);

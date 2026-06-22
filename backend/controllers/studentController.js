@@ -4,37 +4,24 @@ import Student from "../models/Student.js";
 export const getAllStudents = async (req, res) => {
   try {
     const students = await Student.find().lean().sort({ createdAt: -1 });
-    res.render("students/listStudents", { students});
+    res.status(200).json(students);
   } catch (error) {
-    console.error(error);
-    req.flash("error", "An error occurred while fetching students");
-    res.redirect("/dashboard");
+    res.status(500).json({message: "Error fetching users", error: error.message})
   }
 };
-// Show form to create a new student
-export const showCreateStudentForm = async (req, res) => {
-  res.render("students/createStudent");
-  // try{}
-  // catch(error){}
-}
 
 // Create a new student
 export const createStudent = async (req, res) => {
   try {
-    const { name, email, phone, status, enrolledDate } = req.body;
+    const { name, email, phone, status } = req.body;
     const existingStudent = await Student.findOne({ email });
     if (existingStudent) {
-      req.flash("error", "A student with this email already exists");
-      return res.redirect("/students");
+     return res.status(400).json({message:'A student with this email already exists'});
     }
-    await Student.create({ name, email, phone, status, enrolledDate: new Date() });
-    req.flash("success", "Student created successfully");
-    res.redirect("/students");
-    console.log("Student created successfully");
+    const newStudent = await Student.create({ name, email, phone, status, enrolledDate: new Date() });
+    res.status(201).json({message:'student created successfully', student: newStudent});
   } catch (error) {
-    console.error(error);
-    req.flash("error", "An error occurred while creating the student");
-    res.redirect("/students/listStudents");
+    res.status(500).json({message:'student not created',error:error.message});
   }
 };
 
@@ -43,61 +30,40 @@ export const createStudent = async (req, res) => {
   try {
     const student = await Student.findById(req.params.id).populate().lean();
     if (!student) {
-      req.flash("error", "Student not found");
-      return res.redirect("/students");
+      return res.status(404).json({message: "Student not found"})
     }
-    res.render("students/showStudent", { student, title: "Student Details" });
+    res.status(200).json(student)
   } catch (error) {
-    console.error(error);
-    req.flash("error", "An error occurred while fetching the student");
-    res.redirect("/students");
+    res.status(500).json({message: "Error fetching student", error: error.message})
   }
  };
 
-
-export const showeditStudentForm = async (req, res) => {
-    try{
-      const student = await Student.findById(req.params.id).lean();
-      if (!student) {
-        req.flash("error", "Student not found");
-        return res.redirect("/students");
-      }
-      res.render("students/edit", { student });
-    } catch (error) {}
-};
-
 export const updateStudent = async (req, res) => {
     try{
-      const { name, email, phone, status, enrolledDate } = req.body;
+      const userData = req.body;
       const student = await Student.findById(req.params.id);
       if (!student) {
-        req.flash("error", "Student not found");
-        return res.redirect("/students");
+        return res.status(404).json({message: "student not found"});
       }
-      student.name = name;
-      student.email = email;
-      student.phone = phone;
-      student.status = status;
-      student.enrolledDate = enrolledDate ? new Date(enrolledDate) : student.enrolledDate;
-      await student.save();
-      req.flash("success", "Student updated successfully");
-      res.redirect("/students");
-      
-    } catch (error) {}
-};
 
-export const showreportStudent = async (req, res) => {
-    try{} catch (error) {}
+      await Student.findByIdAndUpdate(req.params.id, userData);
+      res.status(200).json({message: "Student updated successfully", student});
+      
+    } catch (error) {
+      res.status(500).json({message: "Error updating student", error: error.message});
+    }
 };
 
 export const deleteStudent = async (req, res) => {
     try{
+      const student = await Student.findById(req.params.id);
+      if (!student) {
+        return res.status(404).json({message: "student not found"});
+      }
+
       await Student.findByIdAndDelete(req.params.id);
-      req.flash("success", "Student deleted successfully");
-      res.redirect("/students");
+      res.status(200).json({message: "Student deleted successfully"})
     } catch (error) {
-      console.error(error);
-      req.flash("error", "An error occurred while deleting the student");
-      res.redirect("/students");
+      res.status(500).json({message: "Error deleting student", error: error.message})
     }
 };
