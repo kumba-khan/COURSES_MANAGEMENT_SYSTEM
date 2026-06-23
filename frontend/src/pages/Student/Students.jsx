@@ -1,19 +1,21 @@
+import { Link } from "react-router-dom";
+
 export default function StudentsList() {
     const students = [
-        { name: 'Amadou Jallow', email: 'amadou.jallow@example.com', phone: '123-456-7890', status: 'Active', enrolledDate: '2023-01-15' },
-        { name: 'Amina Diallo', email: 'amina.diallo@example.com', phone: '098-765-4321', status: 'Active', enrolledDate: '2023-02-20' },
-        { name: 'Fatoumata Ceesay', email: 'fatoumata.ceesay@example.com', phone: '555-555-5555', status: 'Active', enrolledDate: '2023-03-10' }
+        { id: "9345793456", name: 'Amadou Jallow', email: 'amadou.jallow@example.com', phone: '123-456-7890', status: 'Active', enrolledDate: '2023-01-15' },
+        { id: "9345793457", name: 'Amina Diallo', email: 'amina.diallo@example.com', phone: '098-765-4321', status: 'Active', enrolledDate: '2023-02-20' },
+        { id: "9345793458", name: 'Fatoumata Ceesay', email: 'fatoumata.ceesay@example.com', phone: '555-555-5555', status: 'Active', enrolledDate: '2023-03-10' }
     ];
     return (
         <div className="card">
             <div className="card-header">
                 <h2>Students</h2>
-                <a href="/students/create" className="btn btn-primary">Add Student</a>
+                <Link to="/students/create" className="btn btn-primary">Add Student</Link>
             </div>
 
             <form className="form-inline mb-md">
                 <div className="form-group">
-                    {/* <input type="text" placeholder="Search by name or email..." value=""> */}
+                    <input type="text" placeholder="Search by name or email..." />
                 </div>
                 <div className="form-group">
                     <select>
@@ -40,7 +42,7 @@ export default function StudentsList() {
                     </thead>
                     <tbody>
                         {students.map((student) => (
-                            <tr key={student._id}>
+                            <tr key={student.id}>
                                 <td>{student.name}</td>
                                 <td>{student.email}</td>
                                 <td>{student.phone}</td>
@@ -49,19 +51,22 @@ export default function StudentsList() {
                                     {new Date(student.enrolledDate).toLocaleDateString()}
                                 </td>
                                 <td>
+                                    <Link to={`/students/${student.id}`}>
                                     <button className="btn btn-sm btn-secondary">
                                         View
                                     </button>
-
-                                    <button className="btn btn-sm btn-outline">
-                                        Edit
-                                    </button>
+                                    </Link>
+                                    <Link to={`/students/${student.id}/edit`}>
+                                        <button className="btn btn-sm btn-outline">
+                                            Edit
+                                        </button>
+                                    </Link>
 
                                     <button
                                         className="btn btn-sm btn-danger"
                                         onClick={() => {
                                             if (window.confirm("Are you sure you want to delete this student?")) {
-                                                console.log("Delete", student._id);
+                                                console.log("Delete", student.name);
                                             }
                                         }}
                                     >

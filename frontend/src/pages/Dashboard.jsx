@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Dashboard() {
     return (
         <div className="dashboard">
@@ -41,10 +43,10 @@ export default function Dashboard() {
                         <h3>Quick Actions</h3>
                     </div>
                     <div className="quick-actions">
-                        <a href="/attendance/mark" className="btn btn-primary">Mark Attendance</a>
-                        <a href="/students/create" className="btn btn-secondary">Add Student</a>
-                        <a href="/courses/list" className="btn btn-secondary">View Courses</a>
-                        <a href="/reports/absences" className="btn btn-outline">View Absences</a>
+                        <Link to="/reports/attendance" className="btn btn-primary">Mark Attendance</Link>
+                        <Link to="/students/create" className="btn btn-secondary">Add Student</Link>
+                        <Link to="/courses" className="btn btn-secondary">View Courses</Link>
+                        <Link to="/recent-absences" className="btn btn-outline">View Absences</Link>
                     </div>
                 </div>
 
@@ -54,15 +56,15 @@ export default function Dashboard() {
                     </div>
                     <ul className="activity-list">
                         <li className="activity-item">
-                            <span className="activity-text">Amadou Jallow marked present for Web Development</span>
+                            <span className="activity-text">Amadou Jallow marked present htmlFor Web Development</span>
                             <span className="activity-time">2 hours ago</span>
                         </li>
                         <li className="activity-item">
-                            <span className="activity-text">Fatou Ceesay marked absent for Database Management</span>
+                            <span className="activity-text">Fatou Ceesay marked absent htmlFor Database Management</span>
                             <span className="activity-time">3 hours ago</span>
                         </li>
                         <li className="activity-item">
-                            <span className="activity-text">Lamin Touray marked late for Programming Basics</span>
+                            <span className="activity-text">Lamin Touray marked late htmlFor Programming Basics</span>
                             <span className="activity-time">4 hours ago</span>
                         </li>
                     </ul>

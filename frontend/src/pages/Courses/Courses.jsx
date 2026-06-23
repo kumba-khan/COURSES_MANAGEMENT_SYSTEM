@@ -13,7 +13,7 @@ export default function AllCourses() {
     <div className="card">
       <div className="card-header">
         <h2>Courses</h2>
-        <a href="/courses/create" className="btn btn-primary">Add Course</a>
+        <Link to="/courses/create" className="btn btn-primary">Add Course</Link>
       </div>
 
       <div className="table-container">
@@ -64,7 +64,7 @@ export default function AllCourses() {
                   </Link>
 
                   <Link
-                    to={`/attendance/mark/${course._id}`}
+                    to={`/attendance-mark/${course._id}`}
                     className="btn btn-sm btn-outline"
                   >
                     Mark Attendance
