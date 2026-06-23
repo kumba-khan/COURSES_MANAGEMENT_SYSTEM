@@ -1,13 +1,43 @@
 import { Link } from "react-router-dom";
+import { getStudentsStats } from "../services/StudentService";
+import { useEffect, useState } from "react";
+import { getCoursesStats } from "../services/CourseService";
 
 export default function Dashboard() {
+    const [studentStats, setStudentStats] = useState(null);
+    const [courseStats, setCourseStats] = useState(null);
+
+    useEffect(() => {
+        const fetchCourseStats = async () => {
+            try {
+                const data = await getCoursesStats();
+                setCourseStats(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        
+        const fetchStudentStats = async () => {
+            try {
+                const data = await getStudentsStats();
+                setStudentStats(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchStudentStats();
+        fetchCourseStats();
+    }, []);
+
+    
     return (
         <div className="dashboard">
             <div className="stats-grid">
                 <div className="stat-card">
                     <div className="stat-icon">👥</div>
                     <div className="stat-info">
-                        <span className="stat-value">24</span>
+                        <span className="stat-value">{studentStats?.total}</span>
                         <span className="stat-label">Total Students</span>
                     </div>
                 </div>
@@ -15,7 +45,7 @@ export default function Dashboard() {
                 <div className="stat-card">
                     <div className="stat-icon">✅</div>
                     <div className="stat-info">
-                        <span className="stat-value">18</span>
+                        <span className="stat-value">{studentStats?.active}</span>
                         <span className="stat-label">Active Students</span>
                     </div>
                 </div>
@@ -23,16 +53,8 @@ export default function Dashboard() {
                 <div className="stat-card">
                     <div className="stat-icon">📚</div>
                     <div className="stat-info">
-                        <span className="stat-value">4</span>
+                        <span className="stat-value">{courseStats?.total}</span>
                         <span className="stat-label">Total Courses</span>
-                    </div>
-                </div>
-
-                <div className="stat-card">
-                    <div className="stat-icon">📋</div>
-                    <div className="stat-info">
-                        <span className="stat-value">42</span>
-                        <span className="stat-label">Marked Today</span>
                     </div>
                 </div>
             </div>
@@ -48,26 +70,6 @@ export default function Dashboard() {
                         <Link to="/courses" className="btn btn-secondary">View Courses</Link>
                         <Link to="/recent-absences" className="btn btn-outline">View Absences</Link>
                     </div>
-                </div>
-
-                <div className="card">
-                    <div className="card-header">
-                        <h3>Recent Activity</h3>
-                    </div>
-                    <ul className="activity-list">
-                        <li className="activity-item">
-                            <span className="activity-text">Amadou Jallow marked present htmlFor Web Development</span>
-                            <span className="activity-time">2 hours ago</span>
-                        </li>
-                        <li className="activity-item">
-                            <span className="activity-text">Fatou Ceesay marked absent htmlFor Database Management</span>
-                            <span className="activity-time">3 hours ago</span>
-                        </li>
-                        <li className="activity-item">
-                            <span className="activity-text">Lamin Touray marked late htmlFor Programming Basics</span>
-                            <span className="activity-time">4 hours ago</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

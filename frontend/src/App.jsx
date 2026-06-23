@@ -22,6 +22,8 @@ import CourseReport from './pages/Report/CourseReport';
 import { logout } from './services/AuthService';
 import ProtectedRoute from './components/ProtectedRoute';
 
+import { user } from "./services/AuthService";
+
 function getPageTitle(pathname) {
   const titleMap = [
     { pattern: /^\/$/, title: 'Dashboard' },
@@ -48,6 +50,7 @@ function getPageTitle(pathname) {
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const currentUser = user();
 
   // Pages that should not use the dashboard layout
   const authPages = ["/auth/login"];
@@ -65,6 +68,8 @@ function App() {
     navigate("/auth/login");
   };
 
+  console.log(currentUser)
+
   return (
     <>
       <div className="app-container">
@@ -75,7 +80,7 @@ function App() {
               <h2 className="page-title">{getPageTitle(location.pathname)}</h2>
             </div>
             <div className="header-right">
-              <span className="user-name">kumba@university.edu</span>
+              <span className="user-name">{currentUser?.email}</span>
               <button onClick={()=>{handleLogout()}} className="btn btn-outline btn-sm">Logout</button>
             </div>
           </header>

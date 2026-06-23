@@ -1,3 +1,4 @@
+import {jwtDecode} from "jwt-decode";
 const API_URL =
   "http://localhost:5000/api/auth";
 
@@ -28,9 +29,21 @@ export const getToken = () => {
   return localStorage.getItem("token");
 };
 
+
+
 export const authHeader = () => ({
   Authorization:
     `Bearer ${localStorage.getItem(
       "token"
     )}`,
 });
+
+export const user = () => {
+    const token = getToken();
+
+    if (!token) {
+        return null;
+    }
+
+    return jwtDecode(token);
+}
