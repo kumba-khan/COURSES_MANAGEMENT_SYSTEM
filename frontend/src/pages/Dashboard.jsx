@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { getStudentsStats } from "../services/StudentService";
 import { useEffect, useState } from "react";
 import { getCoursesStats } from "../services/CourseService";
+import { Helmet } from 'react-helmet-async';
 
 export default function Dashboard() {
     const [studentStats, setStudentStats] = useState(null);
@@ -32,8 +33,13 @@ export default function Dashboard() {
 
     
     return (
-        <div className="dashboard">
-            <div className="stats-grid">
+        <>
+            <Helmet>
+                <title>Dashboard</title>
+                <meta name="description" content="Welcome to the dashboard." />
+            </Helmet>
+            <div className="dashboard">
+                <div className="stats-grid">
                 <div className="stat-card">
                     <div className="stat-icon">👥</div>
                     <div className="stat-info">
@@ -71,5 +77,6 @@ export default function Dashboard() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

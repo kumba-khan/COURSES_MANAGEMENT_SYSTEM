@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { createCourse } from "../../services/CourseService";
 
 export default function AddCourse() {
@@ -42,8 +43,13 @@ export default function AddCourse() {
 
 
   return (
-    <div className="card">
-      <div className="card-header">
+    <>
+      <Helmet>
+        <title>Add Course</title>
+        <meta name="description" content="Add a new course to the attendance system." />
+      </Helmet>
+      <div className="card">
+        <div className="card-header">
         <h2>Add New Course</h2>
         <button onClick={() => navigate(-1)} className="btn btn-outline">Back</button>
       </div>
@@ -61,11 +67,11 @@ export default function AddCourse() {
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="startDate">Start Date *</label>
-            <input type="date" id="startDate" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate} required value="2025-01-15" />
+            <input type="date" id="startDate" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate} required />
           </div>
           <div className="form-group">
             <label htmlFor="endDate">End Date *</label>
-            <input type="date" id="endDate" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate} required value="2025-04-15" />
+            <input type="date" id="endDate" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate} required />
           </div>
         </div>
 
@@ -94,5 +100,6 @@ export default function AddCourse() {
         )}
       </div>
     </div>
+    </>
   )
 }

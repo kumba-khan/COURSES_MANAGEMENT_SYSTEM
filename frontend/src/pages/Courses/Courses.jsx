@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { deleteCourse, getCourses } from "../../services/CourseService";
 
 export default function AllCourses() {
@@ -55,8 +56,13 @@ export default function AllCourses() {
   }
 
   return (
-    <div className="card">
-      <div className="card-header">
+    <>
+      <Helmet>
+        <title>All Courses</title>
+        <meta name="description" content="Browse and manage all courses in the attendance system." />
+      </Helmet>
+      <div className="card">
+        <div className="card-header">
         <h2>Courses</h2>
         <Link to="/courses/create" className="btn btn-primary">Add Course</Link>
       </div>
@@ -143,5 +149,6 @@ export default function AllCourses() {
         )}
       </div>
     </div>
+    </>
   )
 }

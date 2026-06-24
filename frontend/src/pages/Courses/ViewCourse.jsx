@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getCourseById } from "../../services/CourseService";
 
@@ -22,8 +23,13 @@ export default function ViewCourse() {
   }, [id])
 
   return (
-    <div className="card">
-      <div className="card-header">
+    <>
+      <Helmet>
+        <title>View Course</title>
+        <meta name="description" content="View detailed information about a course." />
+      </Helmet>
+      <div className="card">
+        <div className="card-header">
         <h2>{course.name}</h2>
         <div className="flex gap-sm">
           <Link to={`/courses/${course._id}/enroll`} className="btn btn-secondary">Manage Enrollments</Link>
@@ -77,5 +83,6 @@ export default function ViewCourse() {
         </table>
       </div>
     </div>
+    </>
   )
 }

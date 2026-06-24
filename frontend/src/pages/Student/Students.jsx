@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { deleteStudent, getStudents } from "../../services/StudentService";
 
 export default function StudentsList() {
@@ -68,9 +69,14 @@ export default function StudentsList() {
         });
     }, [students, searchTerm, statusFilter]);
     return (
-        <div className="card">
-            <div className="card-header">
-                <h2>Students</h2>
+        <>
+            <Helmet>
+                <title>All Students</title>
+                <meta name="description" content="Browse and manage all students in the attendance system." />
+            </Helmet>
+            <div className="card">
+                <div className="card-header">
+                    <h2>Students</h2>
                 <Link to="/students/create" className="btn btn-primary">Add Student</Link>
             </div>
 
@@ -170,5 +176,6 @@ export default function StudentsList() {
                 )}
             </div>
         </div>
+        </>
     )
 }

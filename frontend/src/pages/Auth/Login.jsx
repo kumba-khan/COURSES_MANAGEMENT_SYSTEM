@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { login } from "../../services/AuthService";
 
 export default function Login() {
@@ -42,38 +43,56 @@ export default function Login() {
 
 
     return (
-        <div className="auth-container">
-            <div className="auth-card">
-                <div className="auth-header">
-                    <h1>Attendance System</h1>
-                    <p>Admin Login</p>
-                </div>
-
-                <form onSubmit={handleSubmit} className="auth-form">
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" name="email" value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required placeholder="admin@example.com" />
+        <>
+            <Helmet>
+                <title>Login</title>
+                <meta name="description" content="Admin login for the attendance system." />
+            </Helmet>
+            <div className="auth-container">
+                <div className="auth-card">
+                    <div className="auth-header">
+                        <h1>Attendance System</h1>
+                        <p>Admin Login</p>
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            name="password" required placeholder="Enter password" />
-                    </div>
-                    {error && (
-                        <div className="alert alert-danger">
-                            {error}
+                    <form onSubmit={handleSubmit} className="auth-form">
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                placeholder="admin@example.com"
+                            />
                         </div>
-                    )}
 
-                    <button type="submit" className="btn btn-primary btn-block">
-                        {loading ? 'Loading' : 'Login'}
-                    </button>
-                </form>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                placeholder="Enter password"
+                            />
+                        </div>
+                        {error && (
+                            <div className="alert alert-danger">
+                                {error}
+                            </div>
+                        )}
+
+                        <button type="submit" className="btn btn-primary btn-block">
+                            {loading ? 'Loading' : 'Login'}
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     )
 }

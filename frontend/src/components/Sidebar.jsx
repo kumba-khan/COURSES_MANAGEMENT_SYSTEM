@@ -5,8 +5,8 @@ export default function Sidebar() {
     return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <h1 className="logo">Attendance</h1>
-        <span className="logo-subtitle">Tracking System</span>
+        <h1 className="logo">Courses</h1>
+        <span className="logo-subtitle">Management System</span>
       </div>
 
       <nav className="sidebar-nav">

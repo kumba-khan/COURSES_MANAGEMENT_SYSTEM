@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { enrollStudent, getCourseById, removeStudent } from "../../services/CourseService";
 import { getStudents } from "../../services/StudentService";
@@ -140,110 +141,116 @@ export default function EnrollStudents() {
 
 
     return (
-        <div className="card">
-            <div className="card-header">
-                <h2>{course?.name}</h2>
-                <button className="btn btn-outline" onClick={() => navigate(-1)}>
-                    Back
-                </button>
-            </div>
-
-            <div className="alert alert-info mb-md">
-                <strong>{course?.students?.length} Students</strong> currently enrolled in this course.
-            </div>
-
-            <h3 className="mb-md">Enroll New Student</h3>
-            {unenrolledStudents.length !== 0 &&
-                <form onSubmit={handleSubmit} className="mb-lg">
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label htmlFor="student">Select Student *</label>
-                            <select id="student" name="student" onChange={(e) => setId(e.target.value)} required defaultValue={""}>
-                                <option value="">Choose a student</option>
-                                {unenrolledStudents?.map((student) => (
-                                    <option key={student._id} value={student._id}>{student.name} ({student.email})</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div
-                            className="form-group"
-                            style={{ alignSelf: "self-end", display: "flex", alignItems: "flex-end" }}
-                        >
-                            <button type="submit" disabled={loading} className="btn btn-primary">
-                                {loading ? "loading..." : "Enroll Student"}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            }
-
-            {unenrolledStudents.length === 0 &&
-                <div className="alert alert-info mb-md">
-                    No Students to enroll (all available students enrolled)
+        <>
+            <Helmet>
+                <title>Enroll Students</title>
+                <meta name="description" content="Enroll and manage student enrollment for this course." />
+            </Helmet>
+            <div className="card">
+                <div className="card-header">
+                    <h2>{course?.name}</h2>
+                    <button className="btn btn-outline" onClick={() => navigate(-1)}>
+                        Back
+                    </button>
                 </div>
-            }
 
-            <h3 className="mb-md">Currently Enrolled Students</h3>
-            <div className="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Student Name</th>
-                            <th>Email</th>
-                            <th>Enrolled Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {students?.map((student, key) => (
-                            <tr key={key}>
-                                <td><Link to={`/students/${student._id}`}>{student.name}</Link></td>
-                                <td>{student.email}</td>
-                                <td>
-                                    {student.enrolledDate || 'N/A'}
-                                </td>
-                                <td>
-                                    <form style={{ display: "inline" }}
-                                        onSubmit={(e) => {
-                                            e.preventDefault()
-                                            handleUnenroll(student._id)
-                                        }}
-                                    >
-                                        <button type="submit" className="btn btn-sm btn-danger">
-                                            {loadingUnenroll ? "loading..." : "unenroll"}
-                                        </button>
-                                    </form>
-                                </td>
+                <div className="alert alert-info mb-md">
+                    <strong>{course?.students?.length} Students</strong> currently enrolled in this course.
+                </div>
+
+                <h3 className="mb-md">Enroll New Student</h3>
+                {unenrolledStudents.length !== 0 &&
+                    <form onSubmit={handleSubmit} className="mb-lg">
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label htmlFor="student">Select Student *</label>
+                                <select id="student" name="student" onChange={(e) => setId(e.target.value)} required defaultValue={""}>
+                                    <option value="">Choose a student</option>
+                                    {unenrolledStudents?.map((student) => (
+                                        <option key={student._id} value={student._id}>{student.name} ({student.email})</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div
+                                className="form-group"
+                                style={{ alignSelf: "self-end", display: "flex", alignItems: "flex-end" }}
+                            >
+                                <button type="submit" disabled={loading} className="btn btn-primary">
+                                    {loading ? "loading..." : "Enroll Student"}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                }
+
+                {unenrolledStudents.length === 0 &&
+                    <div className="alert alert-info mb-md">
+                        No Students to enroll (all available students enrolled)
+                    </div>
+                }
+
+                <h3 className="mb-md">Currently Enrolled Students</h3>
+                <div className="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Email</th>
+                                <th>Enrolled Date</th>
+                                <th>Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {students?.map((student, key) => (
+                                <tr key={key}>
+                                    <td><Link to={`/students/${student._id}`}>{student.name}</Link></td>
+                                    <td>{student.email}</td>
+                                    <td>
+                                        {student.enrolledDate || 'N/A'}
+                                    </td>
+                                    <td>
+                                        <form style={{ display: "inline" }}
+                                            onSubmit={(e) => {
+                                                e.preventDefault()
+                                                handleUnenroll(student._id)
+                                            }}
+                                        >
+                                            <button type="submit" className="btn btn-sm btn-danger">
+                                                {loadingUnenroll ? "loading..." : "unenroll"}
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="fixed-notification">
+                    {errorUnenroll && (
+                        <div className="alert alert-danger">
+                            {errorUnenroll}
+                        </div>
+                    )}
+
+                    {successUnenroll && (
+                        <div className="alert alert-success">
+                            {successUnenroll}
+                        </div>
+                    )}
+                    {error && (
+                        <div className="alert alert-danger">
+                            {error}
+                        </div>
+                    )}
+
+                    {success && (
+                        <div className="alert alert-success">
+                            {success}
+                        </div>
+                    )}
+                </div>
             </div>
-
-            <div className="fixed-notification">
-                {errorUnenroll && (
-                    <div className="alert alert-danger">
-                        {errorUnenroll}
-                    </div>
-                )}
-
-                {successUnenroll && (
-                    <div className="alert alert-success">
-                        {successUnenroll}
-                    </div>
-                )}
-                {error && (
-                    <div className="alert alert-danger">
-                        {error}
-                    </div>
-                )}
-
-                {success && (
-                    <div className="alert alert-success">
-                        {success}
-                    </div>
-                )}
-            </div>
-        </div>
+        </>
     )
 }

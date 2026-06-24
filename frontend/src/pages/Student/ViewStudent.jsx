@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getStudentById } from "../../services/StudentService";
 
@@ -24,8 +25,13 @@ export default function ViewStudent() {
   }, [id]);
 
   return (
-    <div className="card">
-      <div className="card-header">
+    <>
+      <Helmet>
+        <title>View Student</title>
+        <meta name="description" content="View student details in the attendance system." />
+      </Helmet>
+      <div className="card">
+        <div className="card-header">
         <h2>{student.name || "Student Details"}</h2>
         <div className="flex gap-sm">
           <Link to={`/students/${student._id}/edit`} className="btn btn-outline">Edit</Link>
@@ -54,5 +60,6 @@ export default function ViewStudent() {
         </div>
       </div>
     </div>
+    </>
   );
 }

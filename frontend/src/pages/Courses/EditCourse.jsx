@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getCourseById, updateCourse } from "../../services/CourseService";
 
@@ -58,8 +59,13 @@ export default function EditCourse() {
   }
 
   return (
-    <div className="card">
-      <div className="card-header">
+    <>
+      <Helmet>
+        <title>Edit Course</title>
+        <meta name="description" content="Edit the selected course details." />
+      </Helmet>
+      <div className="card">
+        <div className="card-header">
         <h2>Edit Course: {course.name}</h2>
         <button onClick={() => navigate(-1)} className="btn btn-outline">
           Back
@@ -119,5 +125,6 @@ export default function EditCourse() {
           )}
         </div>
     </div>
+    </>
   )
 }
