@@ -79,9 +79,9 @@ export const deleteCourse = async (req, res) => {
 // Enroll a student in a course
 export const enrollStudent = async (req, res) => {
     try {
-        const { student } = req.body;
+        const { studentId } = req.body;
 
-        if(!student){
+        if(!studentId){
             return res.status(400).json({message: "Please select a student to enroll"});
         }
 
@@ -91,7 +91,7 @@ export const enrollStudent = async (req, res) => {
             return res.status(404).json({message: "course not found"});
         }
 
-        const existingStudent = await Student.findById(student);
+        const existingStudent = await Student.findById(studentId);
 
         if (!existingStudent) {
             return res.status(404).json({message: "Student not found"});
@@ -100,14 +100,14 @@ export const enrollStudent = async (req, res) => {
         // 🔥 FIX: proper duplicate check
         const alreadyEnrolled = course.students
             .map(s => s.toString())
-            .includes(student);
+            .includes(studentId);
 
         if (alreadyEnrolled) {
             return res.status(400).json({message: "Student already enrolled"});
         }
 
         // 🔥 safer update
-        course.students.push(student);
+        course.students.push(studentId);
         const updatedCourse = await course.save();
 
         return res.status(200).json({message: "Student enrolled successfully", updatedCourse});
