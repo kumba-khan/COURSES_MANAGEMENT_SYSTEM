@@ -7,7 +7,6 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import studentsRoutes from "./routes/studentRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
-import attendanceRoutes from "./routes/attendanceRoutes.js";
 
 //import middleware
 import {authenticate} from "./middleware/authMiddleware.js"
@@ -26,7 +25,6 @@ app.use(cors());
 app.use("/api/auth", authRoutes);
 app.use("/api/students", authenticate, studentsRoutes);
 app.use("/api/courses", authenticate, courseRoutes);
-app.use("/api/attendance", authenticate, attendanceRoutes);
 
 
 
