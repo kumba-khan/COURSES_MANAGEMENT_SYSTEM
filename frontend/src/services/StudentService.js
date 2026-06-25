@@ -1,6 +1,6 @@
 import { authHeader } from "./AuthService";
 
-const API_URL = "http://localhost:5000/api/students";
+const API_URL = "https://courses-management-system-od7r.onrender.com/api/students";
 
 export const getStudents = async () => {
     const response =

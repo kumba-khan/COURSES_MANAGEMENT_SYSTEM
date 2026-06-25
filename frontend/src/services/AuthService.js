@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://courses-management-system-od7r.onrender.com/api/auth";
 
 export const login = async (email, password) => {
   const response = await fetch(
