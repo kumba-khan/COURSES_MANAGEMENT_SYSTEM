@@ -1,24 +1,39 @@
-import Student from "../models/Student.js";
+import User from "../models/User.js";
+import bcrypt from "bcryptjs";
+import { getAllCourses } from "./courseController.js";
+import Course from "../models/Course.js";
 
 // Get all students
 export const getAllStudents = async (req, res) => {
   try {
-    const students = await Student.find().lean().sort({ createdAt: -1 });
+    const students = await User.find({ role: "student" }).lean().sort({ createdAt: -1 });
     res.status(200).json(students);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching users", error: error.message })
+    res.status(500).json({ message: "Error fetching students", error: error.message })
   }
 };
+
+//get Active students
+export const getActiveStudents = async (req, res) => {
+  try {
+    const students = await User.find({ role: "student", status: "active" }).lean().sort({ createdAt: -1 });
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching active students", error: error.message })
+  }
+}
 
 // Create a new student
 export const createStudent = async (req, res) => {
   try {
-    const { name, email, phone, status } = req.body;
-    const existingStudent = await Student.findOne({ email });
+    const { name, password, email, phone, status } = req.body;
+    const existingStudent = await User.findOne({ email });
     if (existingStudent) {
       return res.status(400).json({ message: 'A student with this email already exists' });
     }
-    const newStudent = await Student.create({ name, email, phone, status, enrolledDate: new Date() });
+
+    const newPassword = await bcrypt.hash(password, 10);
+    const newStudent = await User.create({ name, password: newPassword, email, phone, status, enrolledDate: new Date() });
     res.status(201).json({ message: 'student created successfully', student: newStudent });
   } catch (error) {
     res.status(500).json({ message: 'student not created', error: error.message });
@@ -28,7 +43,11 @@ export const createStudent = async (req, res) => {
 // Get student by ID
 export const getStudentById = async (req, res) => {
   try {
-    const student = await Student.findById(req.params.id).populate().lean();
+    const student = await User.findOne({
+      _id: req.params.id,
+      role: "student"
+    }).lean();
+
     if (!student) {
       return res.status(404).json({ message: "Student not found" })
     }
@@ -41,12 +60,16 @@ export const getStudentById = async (req, res) => {
 export const updateStudent = async (req, res) => {
   try {
     const userData = req.body;
-    const student = await Student.findById(req.params.id);
+    const student = await User.findOne({
+      _id: req.params.id,
+      role: "student"
+    }).lean();
+
     if (!student) {
       return res.status(404).json({ message: "student not found" });
     }
 
-    await Student.findByIdAndUpdate(req.params.id, userData);
+    await User.findByIdAndUpdate(req.params.id, userData);
     res.status(200).json({ message: "Student updated successfully", student });
 
   } catch (error) {
@@ -56,12 +79,27 @@ export const updateStudent = async (req, res) => {
 
 export const deleteStudent = async (req, res) => {
   try {
-    const student = await Student.findById(req.params.id);
+    const student = await User.findOne({
+      _id: req.params.id,
+      role: "student"
+    }).lean();
+
     if (!student) {
       return res.status(404).json({ message: "student not found" });
     }
 
-    await Student.findByIdAndDelete(req.params.id);
+    await User.findByIdAndDelete(req.params.id);
+
+    // Remove student from all courses
+    await Course.updateMany(
+      {},
+      {
+        $pull: {
+          students: req.params.id
+        }
+      }
+    );
+
     res.status(200).json({ message: "Student deleted successfully" })
   } catch (error) {
     res.status(500).json({ message: "Error deleting student", error: error.message })
@@ -70,7 +108,7 @@ export const deleteStudent = async (req, res) => {
 
 export const studentStatistic = async (req, res) => {
   try {
-    const students = await Student.find();
+    const students = await User.find({ role: "student" }).lean().sort({ createdAt: -1 });
     const graduated = students.filter(
       student => student.status === "graduated"
     ).length;
@@ -88,3 +126,5 @@ export const studentStatistic = async (req, res) => {
     res.status(500).json({ message: "Error fetching users", error: error.message })
   }
 }
+
+//updatePassword

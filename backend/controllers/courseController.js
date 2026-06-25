@@ -1,5 +1,5 @@
 import Course from '../models/Course.js';
-import Student from '../models/Student.js';
+import User from '../models/User.js';
 
 // Get all courses
 export const getAllCourses = async (req, res) => {
@@ -91,10 +91,15 @@ export const enrollStudent = async (req, res) => {
             return res.status(404).json({message: "course not found"});
         }
 
-        const existingStudent = await Student.findById(studentId);
+        const existingStudent = await User.findOne({_id: studentId, role: "student"});
+        
 
         if (!existingStudent) {
             return res.status(404).json({message: "Student not found"});
+        }
+
+        if(existingStudent.status !== "active"){
+            return res.status(400).json({message: "Only active students can be enrolled"})
         }
 
         // 🔥 FIX: proper duplicate check
@@ -118,7 +123,7 @@ export const enrollStudent = async (req, res) => {
 };
 
 // Remove a student from a course
-export const removeStudent = async (req, res) => {
+export const unenrollStudent = async (req, res) => {
     try {
         const { id, studentId } = req.params;
 
@@ -134,7 +139,7 @@ export const removeStudent = async (req, res) => {
             .includes(studentId);
 
         if (!isEnrolled) {
-            return res.status(400).json({message: "Student not enrolled in this course"});
+            return res.status(400).json({message: "The student was not enrolled in this course"});
         }
 
         // remove student
@@ -163,3 +168,5 @@ export const getCourseStats = async (req, res) => {
         res.status(500).json({message: "error getting courses", error: error.message})
     }
 };
+
+//getStudentCourses

@@ -21,7 +21,7 @@ export const login = async (req, res) => {
     // Set user session
     const accessToken = jwt.sign({
       userId:user._id,
-      username: user.username,
+      username: user.name,
       email: user.email,
       role: user.role
     },

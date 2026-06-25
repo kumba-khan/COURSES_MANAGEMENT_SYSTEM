@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 
 
-export default function Sidebar() {
+export default function Sidebar({username, role}) {
     return (
     <aside className="sidebar">
       <div className="sidebar-header">
         <h1 className="logo">Courses</h1>
         <span className="logo-subtitle">Management System</span>
+        <p>{username}</p>
+        <p>{role}</p>
       </div>
 
       <nav className="sidebar-nav">

@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import User from "./models/User.js";
 import connectDB from "./config/db.js";
 
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: ".env" });
 
 const createRoles = async () => {
     try{
@@ -17,17 +17,10 @@ const createRoles = async () => {
 
         const users = [
             {
-                username: "Kumba Khan",
+                name: "Kumba Khan",
                 email: "kumba@gmail.com",
                 password: await bcrypt.hash("admin123", 10),
                 role: "admin"
-            },
-
-            {
-                username: "Momodou Khan",
-                email: "momodou@gmail.com",
-                password: await bcrypt.hash("student123", 10),
-                role: "student"
             }
         ];
 

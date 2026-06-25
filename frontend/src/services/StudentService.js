@@ -17,6 +17,18 @@ export const getStudents = async () => {
     return data;
 };
 
+export const getActiveStudents = async () => {
+    const response = await fetch(`${API_URL}/active`, { headers: authHeader() });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Something went wrong");
+    }
+
+    return data;
+};
+
 export const getStudentsStats = async () => {
     const response = await fetch(`${API_URL}/stats`, {
         headers: authHeader(),

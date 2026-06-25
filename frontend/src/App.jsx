@@ -61,7 +61,7 @@ function App() {
   return (
     <>
       <div className="app-container">
-        <Sidebar />
+        <Sidebar username={currentUser?.username} role={currentUser?.role} />
         <main className="main-content">
           <header className="header">
             <div className="header-left">

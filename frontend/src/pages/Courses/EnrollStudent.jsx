@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { enrollStudent, getCourseById, removeStudent } from "../../services/CourseService";
-import { getStudents } from "../../services/StudentService";
+import { getActiveStudents, getStudents } from "../../services/StudentService";
 
 export default function EnrollStudents() {
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function EnrollStudents() {
                 setStudents(courseData?.students)
 
 
-                const studentsData = await getStudents();
+                const studentsData = await getActiveStudents();
 
                 const enrolledIds = courseData.students.map(
                     (student) => student._id
@@ -206,7 +206,7 @@ export default function EnrollStudents() {
                                     <td><Link to={`/students/${student._id}`}>{student.name}</Link></td>
                                     <td>{student.email}</td>
                                     <td>
-                                        {student.enrolledDate || 'N/A'}
+                                        {new Date(student.enrolledDate).toLocaleDateString() || 'N/A'}
                                     </td>
                                     <td>
                                         <form style={{ display: "inline" }}

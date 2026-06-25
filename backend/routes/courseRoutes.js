@@ -7,18 +7,19 @@ import {
     updateCourse,
     deleteCourse,
     enrollStudent,
-    removeStudent,
+    unenrollStudent,
     getCourseStats
 } from "../controllers/courseController.js";
+import { authorize, authorizeAdminAndParticularStudent } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
 router.get("/", getAllCourses);
 router.get("/stats", getCourseStats);
-router.post("/", createCourse);
-router.post("/:id/enroll", enrollStudent);
-router.delete("/:id/:studentId", removeStudent);
-router.put("/:id", updateCourse);
-router.delete("/:id", deleteCourse);
+router.post("/",authorize("admin"), createCourse);
+router.post("/:id/enroll",authorizeAdminAndParticularStudent, enrollStudent);
+router.delete("/:id/:studentId", authorizeAdminAndParticularStudent, unenrollStudent);//we have to work on this one
+router.put("/:id", authorize("admin"),updateCourse);
+router.delete("/:id",authorize("admin"), deleteCourse);
 router.get("/:id", getCourseById);
 export default router;

@@ -5,16 +5,19 @@ import {
   getStudentById,
   updateStudent,
   deleteStudent,
-  studentStatistic
+  studentStatistic,
+  getActiveStudents
 } from "../controllers/studentController.js";
+import { authorize, authorizeAdminAndParticularStudent } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.get("/", getAllStudents);
+router.get("/", authorize("admin"),getAllStudents);
+router.get("/active", authorize("admin"),getActiveStudents);
 router.get("/stats", studentStatistic);
-router.get("/:id", getStudentById);
-router.post("/", createStudent);
-router.put("/:id", updateStudent);
-router.delete("/:id", deleteStudent);
+router.get("/:id",authorizeAdminAndParticularStudent, getStudentById);
+router.post("/", authorize("admin"), createStudent);
+router.put("/:id", authorize("admin"), updateStudent);
+router.delete("/:id",authorize("admin"), deleteStudent);
 
 export default router;

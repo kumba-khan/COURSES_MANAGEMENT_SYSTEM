@@ -14,6 +14,7 @@ export default function AddStudent() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState("");
+  const [password, setPassword] = useState("");
   const [enrolledDate, setEnrolledDate] = useState("");
 
   const handleSubmit = async (e) => {
@@ -21,7 +22,7 @@ export default function AddStudent() {
     setLoading(true);
 
     try {
-      await createStudent({ name, email, phone, status, enrolledDate: new Date(enrolledDate) });
+      await createStudent({ name, password, email, phone, status, enrolledDate: new Date(enrolledDate) });
 
       setSuccess("Student added successfully");
       setTimeout(() => {
@@ -82,6 +83,18 @@ export default function AddStudent() {
 
           <div className="form-row">
             <div className="form-group">
+              <label htmlFor="password">Password *</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+                placeholder="Enter your password"
+              />
+            </div>
+            <div className="form-group">
               <label htmlFor="phone">Phone</label>
               <input
                 type="text"
@@ -92,6 +105,9 @@ export default function AddStudent() {
                 placeholder="Phone number"
               />
             </div>
+          </div>
+
+          <div className="form-row">
             <div className="form-group">
               <label htmlFor="status">Status *</label>
               <select
@@ -107,18 +123,17 @@ export default function AddStudent() {
                 <option value="graduated">Graduated</option>
               </select>
             </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="enrolledDate">Enrolled Date</label>
-            <input
-              type="date"
-              id="enrolledDate"
-              name="enrolledDate"
-              onChange={(e) => setEnrolledDate(e.target.value)}
-              value={enrolledDate}
-              placeholder="Enrolled Date"
-            />
+            <div className="form-group">
+              <label htmlFor="enrolledDate">Enrolled Date</label>
+              <input
+                type="date"
+                id="enrolledDate"
+                name="enrolledDate"
+                onChange={(e) => setEnrolledDate(e.target.value)}
+                value={enrolledDate}
+                placeholder="Enrolled Date"
+              />
+            </div>
           </div>
 
           <div className="form-group">
