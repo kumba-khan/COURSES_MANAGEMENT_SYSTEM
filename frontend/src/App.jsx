@@ -45,6 +45,10 @@ function App() {
   const navigate = useNavigate();
   // const currentUser = user();
   const [currentUser, setCurrentUser] = useState(()=>user())
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+  const closeSidebar = () => setSidebarOpen(false);
 
   // Pages that should not use the dashboard layout
   const authPages = ["/auth/login"];
@@ -67,10 +71,19 @@ function App() {
   return (
     <>
       <div className="app-container">
-        <Sidebar username={currentUser?.username} role={currentUser?.role} />
+        <Sidebar
+          username={currentUser?.username}
+          role={currentUser?.role}
+          isOpen={sidebarOpen}
+          onLinkClick={closeSidebar}
+        />
+        <div className={`sidebar-backdrop ${sidebarOpen ? 'active' : ''}`} onClick={closeSidebar} />
         <main className="main-content">
           <header className="header">
             <div className="header-left">
+              <button className="menu-toggle" onClick={toggleSidebar} aria-label="Toggle sidebar">
+                ☰
+              </button>
               <h2 className="page-title">{getPageTitle(location.pathname)}</h2>
             </div>
             <div className="header-right">
